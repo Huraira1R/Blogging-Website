@@ -6,41 +6,41 @@ on:
 
 jobs:
   lint:
-    name: Lint HTML and CSS
+    name: Lint HTML & CSS
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '20'
 
       - name: Install dependencies
-        run: |
-          npm install -g htmlhint stylelint stylelint-config-standard
+        run: npm install
 
       - name: Lint HTML
-        run: htmlhint "src/**/*.html"
+        run: npm run lint:html
 
       - name: Lint CSS
-        run: stylelint "styles/**/*.css"
+        run: npm run lint:css
 
   build:
-    name: Build Static Site
+    name: Build Website
     runs-on: ubuntu-latest
-
+    needs: lint
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '20'
 
-      - name: Install Parcel
-        run: npm install -g parcel
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build site
-        run: parcel build src/index.html --dist-dir build
+      - name: Build with Parcel
+        run: npm run build
