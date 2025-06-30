@@ -1,12 +1,15 @@
 {
   "name": "blogging-website",
   "version": "1.0.0",
-  "description": "Blogging website for DevOps assignment",
+  "description": "",
   "main": "index.js",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:html": "htmlhint \"**/*.html\"",
+    "lint:css": "stylelint \"**/*.css\"",
+    "build": "parcel build src/index.html"
   },
-  "keywords": [],
+
   "author": "",
   "license": "ISC"
 }
